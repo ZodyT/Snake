@@ -31,7 +31,7 @@ namespace Snake
         {
             this.components = new System.ComponentModel.Container();
             this.startButton = new System.Windows.Forms.Button();
-            this.SnapButton = new System.Windows.Forms.Button();
+            this.snapButton = new System.Windows.Forms.Button();
             this.picCanvas = new System.Windows.Forms.PictureBox();
             this.txtScore = new System.Windows.Forms.Label();
             this.txtHighscore = new System.Windows.Forms.Label();
@@ -51,22 +51,22 @@ namespace Snake
             this.startButton.UseVisualStyleBackColor = false;
             this.startButton.Click += new System.EventHandler(this.StartGame);
             // 
-            // SnapButton
+            // snapButton
             // 
-            this.SnapButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.SnapButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.SnapButton.Location = new System.Drawing.Point(623, 162);
-            this.SnapButton.Name = "SnapButton";
-            this.SnapButton.Size = new System.Drawing.Size(95, 48);
-            this.SnapButton.TabIndex = 0;
-            this.SnapButton.Text = "Snap";
-            this.SnapButton.UseVisualStyleBackColor = false;
-            this.SnapButton.Click += new System.EventHandler(this.TakeSnapShot);
+            this.snapButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.snapButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.snapButton.Location = new System.Drawing.Point(623, 162);
+            this.snapButton.Name = "snapButton";
+            this.snapButton.Size = new System.Drawing.Size(95, 48);
+            this.snapButton.TabIndex = 0;
+            this.snapButton.Text = "Snap";
+            this.snapButton.UseVisualStyleBackColor = false;
+            this.snapButton.Click += new System.EventHandler(this.TakeSnapShot);
             // 
             // picCanvas
             // 
             this.picCanvas.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.picCanvas.Location = new System.Drawing.Point(12, 12);
+            this.picCanvas.Location = new System.Drawing.Point(12, 22);
             this.picCanvas.Name = "picCanvas";
             this.picCanvas.Size = new System.Drawing.Size(580, 680);
             this.picCanvas.TabIndex = 1;
@@ -106,7 +106,7 @@ namespace Snake
             this.Controls.Add(this.txtHighscore);
             this.Controls.Add(this.txtScore);
             this.Controls.Add(this.picCanvas);
-            this.Controls.Add(this.SnapButton);
+            this.Controls.Add(this.snapButton);
             this.Controls.Add(this.startButton);
             this.Name = "ClassicSnakeGame";
             this.Text = "Form1";
@@ -121,7 +121,7 @@ namespace Snake
         #endregion
 
         private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.Button SnapButton;
+        private System.Windows.Forms.Button snapButton;
         private System.Windows.Forms.PictureBox picCanvas;
         private System.Windows.Forms.Label txtScore;
         private System.Windows.Forms.Label txtHighscore;

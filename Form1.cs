@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace Snake
 {
@@ -85,7 +86,31 @@ namespace Snake
 
         private void TakeSnapShot(object sender, EventArgs e)
         {
+            Label caption = new Label();
+            caption.Text = "I scored: " + score + " and my Highscore is " + highScore + " on the Snake Game";
+            caption.Font = new Font("Ariel", 12, FontStyle.Bold);
+            caption.ForeColor = Color.Black;
+            caption.AutoSize = false;
+            caption.Width = picCanvas.Width;
+            caption.Height = 30;
+            caption.TextAlign = ContentAlignment.MiddleCenter;
+            picCanvas.Controls.Add(caption);
 
+           SaveFileDialog dialog = new SaveFileDialog();
+           dialog.FileName = "Snake Game SnapShot";
+           dialog.DefaultExt = "jpg";
+           dialog.Filter = "JPG Image File | *.jpg";
+           dialog.ValidateNames = true;
+           
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                int width = Convert.ToInt32(picCanvas.Width);
+                int height = Convert.ToInt32(picCanvas.Height);
+                Bitmap bmp = new Bitmap(width, height);
+                picCanvas.DrawToBitmap(bmp, new Rectangle(0,0, width, height));
+                bmp.Save(dialog.FileName, ImageFormat.Jpeg);
+                picCanvas.Controls.Remove(caption);            
+            }
         }
 
         private void GameTimerEvent(object sender, EventArgs e)
@@ -145,6 +170,7 @@ namespace Snake
                     {
                         Snake[i].Y = 0;
                     }
+
                     if (Snake[i].X == food.X && Snake[i].Y == food.Y)
                     {
                         EatFood();
@@ -206,12 +232,12 @@ namespace Snake
         private void RestartGame()
         {
             maxWidth = picCanvas.Width / Settings.Width - 1;
-            maxWidth = picCanvas.Height / Settings.Height - 1;
+            maxHeight = picCanvas.Height / Settings.Height - 1;
 
             Snake.Clear();
 
             startButton.Enabled = false;
-            SnapButton.Enabled = false;
+            snapButton.Enabled = false;
             score = 0;
             txtScore.Text = "Score: " + score;
 
@@ -224,7 +250,7 @@ namespace Snake
                 Snake.Add(body);
             }
 
-            food = new Circle { X = rand.Next(1, maxWidth), Y = rand.Next(1, maxHeight) };
+            food = new Circle { X = rand.Next(2, maxWidth), Y = rand.Next(2, maxHeight) };
 
             gameTimer.Start();
         }
@@ -238,15 +264,11 @@ namespace Snake
             Circle body = new Circle
             {
                 X = Snake[Snake.Count - 1].X,
-                Y = Snake[Snake.Count - 1].Y,
+                Y = Snake[Snake.Count - 1].Y
             };
 
             Snake.Add(body);
-            food = new Circle { X = rand.Next(1, maxWidth), Y = rand.Next(1, maxHeight) };
-
-
-
-
+            food = new Circle { X = rand.Next(2, maxWidth), Y = rand.Next(2, maxHeight) };
 
         }
 
@@ -254,20 +276,16 @@ namespace Snake
         {
             gameTimer.Stop();
             startButton.Enabled = true;
-            SnapButton.Enabled = true;
+            snapButton.Enabled = true;
 
             if (score > highScore)
             {
                 highScore = score;
-                txtHighscore.Text = "High Score: " + Environment.NewLine = highScore;
+                txtHighscore.Text = "High Score: " + Environment.NewLine + highScore;
                 txtHighscore.ForeColor = Color.Maroon;
                 txtHighscore.TextAlign = ContentAlignment.MiddleCenter;
 
             }
         }
-
-
-
-
     }
 }
